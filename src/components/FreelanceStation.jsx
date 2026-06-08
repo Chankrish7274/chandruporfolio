@@ -70,7 +70,8 @@ export default function FreelanceStation() {
               transition={{ duration: 0.6, delay: i * 0.1 }}
               whileHover={{
                 scale: 1.05,
-                boxShadow: `0 0 40px ${service.color}20`,
+                borderColor: service.color,
+                boxShadow: `0 0 30px ${service.color}33, inset 0 0 30px ${service.color}05`,
               }}
             >
               {/* Hologram line */}

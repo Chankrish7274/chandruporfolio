@@ -81,7 +81,11 @@ export default function SkillsForest() {
               initial={{ y: 50, opacity: 0 }}
               animate={isInView ? { y: 0, opacity: 1 } : {}}
               transition={{ duration: 0.6, delay: ci * 0.15 }}
-              whileHover={{ scale: 1.03 }}
+              whileHover={{
+                scale: 1.03,
+                borderColor: cat.color,
+                boxShadow: `0 0 30px ${cat.color}33, inset 0 0 30px ${cat.color}05`,
+              }}
             >
               {/* Glow effect */}
               <div style={{

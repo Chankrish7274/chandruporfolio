@@ -91,7 +91,12 @@ export default function ProjectKingdom() {
               initial={{ y: 60, opacity: 0 }}
               animate={isInView ? { y: 0, opacity: 1 } : {}}
               transition={{ duration: 0.6, delay: i * 0.12 }}
-              whileHover={{ scale: 1.03, y: -8 }}
+              whileHover={{
+                scale: 1.03,
+                y: -8,
+                borderColor: project.color,
+                boxShadow: `0 0 30px ${project.color}33, inset 0 0 30px ${project.color}05`,
+              }}
               onClick={() => setExpanded(expanded === i ? null : i)}
             >
               {/* Building glow */}

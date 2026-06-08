@@ -170,18 +170,28 @@ export default function AboutSection() {
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
               {[
-                { icon: '🎯', label: 'Focus', value: 'MERN Stack' },
-                { icon: '🤖', label: 'AI Skills', value: 'Prompting & Analytics' },
-                { icon: '⚡', label: 'Idea Builder', value: 'Creative Builder' },
-                { icon: '🚀', label: 'Projects', value: '10+' },
+                { icon: '🎯', label: 'Focus', value: 'MERN Stack', color: '#00d4ff' },
+                { icon: '🤖', label: 'AI Skills', value: 'Prompting & Analytics', color: '#a855f7' },
+                { icon: '⚡', label: 'Idea Builder', value: 'Creative Builder', color: '#ec4899' },
+                { icon: '🚀', label: 'Projects', value: '10+', color: '#10b981' },
               ].map(stat => (
-                <div key={stat.label} style={{
-                  padding: '15px',
-                  background: 'rgba(255,255,255,0.02)',
-                  border: '1px solid rgba(255,255,255,0.05)',
-                  borderRadius: '12px',
-                  textAlign: 'center',
-                }}>
+                <motion.div
+                  key={stat.label}
+                  whileHover={{
+                    scale: 1.05,
+                    borderColor: stat.color,
+                    boxShadow: `0 0 20px ${stat.color}33`,
+                  }}
+                  style={{
+                    padding: '15px',
+                    background: 'rgba(255,255,255,0.02)',
+                    border: '1px solid rgba(255,255,255,0.05)',
+                    borderRadius: '12px',
+                    textAlign: 'center',
+                    cursor: 'pointer',
+                    transition: 'border-color 0.3s, box-shadow 0.3s',
+                  }}
+                >
                   <div style={{ fontSize: '1.5rem', marginBottom: 5 }}>{stat.icon}</div>
                   <div style={{
                     fontFamily: "'Orbitron', sans-serif",
@@ -193,10 +203,10 @@ export default function AboutSection() {
                   <div style={{
                     fontFamily: "'Rajdhani', sans-serif",
                     fontSize: '1rem',
-                    color: '#00d4ff',
+                    color: stat.color,
                     fontWeight: 600,
                   }}>{stat.value}</div>
-                </div>
+                </motion.div>
               ))}
             </div>
 
