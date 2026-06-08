@@ -8,7 +8,8 @@ const projects = [
     tech: ['React.js', 'Node.js', 'MongoDB', 'Express.js'],
     icon: '🏢',
     color: '#00d4ff',
-    github: '#',
+    github: 'https://github.com/Chankrish7274/Bench-Allocation-System',
+    demo: 'https://chandruporfolio.netlify.app/',
   },
   {
     title: 'Food Ordering System',
@@ -16,7 +17,7 @@ const projects = [
     tech: ['React.js', 'Node.js', 'MongoDB', 'Express.js'],
     icon: '🍕',
     color: '#f97316',
-    github: '#',
+    github: 'https://github.com/Chankrish7274/Food-Ordering-System',
   },
   {
     title: 'Resume Analyzer',
@@ -24,7 +25,7 @@ const projects = [
     tech: ['React.js', 'Node.js', 'Python', 'NLP'],
     icon: '📄',
     color: '#a855f7',
-    github: '#',
+    github: 'https://github.com/Chankrish7274/Resume-Analyzer',
   },
   {
     title: 'Secure Login System',
@@ -32,7 +33,7 @@ const projects = [
     tech: ['React.js', 'Node.js', 'JWT', 'bcrypt'],
     icon: '🔐',
     color: '#10b981',
-    github: '#',
+    github: 'https://github.com/Chankrish7274/Secure-Login-System',
   },
   {
     title: 'Video Chat Application',
@@ -40,7 +41,7 @@ const projects = [
     tech: ['React.js', 'WebRTC', 'Socket.io', 'Node.js'],
     icon: '📹',
     color: '#ec4899',
-    github: '#',
+    github: 'https://github.com/Chankrish7274/Video-Chat-App',
   },
   {
     title: 'Movie Ticket Booking App',
@@ -48,7 +49,7 @@ const projects = [
     tech: ['React Native', 'Node.js', 'MongoDB', 'Stripe'],
     icon: '🎬',
     color: '#22d3ee',
-    github: '#',
+    github: 'https://github.com/Chankrish7274/Movie-Ticket-Booking',
   },
 ]
 
@@ -142,21 +143,51 @@ export default function ProjectKingdom() {
               </div>
 
               {/* Links */}
-              <div style={{ display: 'flex', gap: 12 }}>
-                <a href={project.github} style={{
-                  padding: '8px 20px',
-                  background: `${project.color}15`,
-                  border: `1px solid ${project.color}30`,
-                  borderRadius: '25px',
-                  color: project.color,
-                  textDecoration: 'none',
-                  fontSize: '0.75rem',
-                  fontFamily: "'Orbitron', sans-serif",
-                  letterSpacing: '1px',
-                  transition: 'all 0.3s',
-                }}>
+              <div style={{ display: 'flex', gap: 12, position: 'relative', zIndex: 10, pointerEvents: 'all' }}>
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={e => e.stopPropagation()}
+                  style={{
+                    padding: '8px 20px',
+                    background: `${project.color}15`,
+                    border: `1px solid ${project.color}30`,
+                    borderRadius: '25px',
+                    color: project.color,
+                    textDecoration: 'none',
+                    fontSize: '0.75rem',
+                    fontFamily: "'Orbitron', sans-serif",
+                    letterSpacing: '1px',
+                    transition: 'all 0.3s',
+                    cursor: 'pointer',
+                  }}
+                >
                   GitHub →
                 </a>
+                {project.demo && (
+                  <a
+                    href={project.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={e => e.stopPropagation()}
+                    style={{
+                      padding: '8px 20px',
+                      background: 'rgba(255,255,255,0.05)',
+                      border: '1px solid rgba(255,255,255,0.15)',
+                      borderRadius: '25px',
+                      color: '#fff',
+                      textDecoration: 'none',
+                      fontSize: '0.75rem',
+                      fontFamily: "'Orbitron', sans-serif",
+                      letterSpacing: '1px',
+                      transition: 'all 0.3s',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    Live Demo ⚡
+                  </a>
+                )}
               </div>
 
               {/* Expanded details */}
