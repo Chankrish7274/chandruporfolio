@@ -1,12 +1,17 @@
 import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 
+// Change this to your Formspree Form ID when ready!
+const FORMSPREE_FORM_ID = 'mpwwpqgl'
+
 export default function ContactSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
   const [focused, setFocused] = useState(null)
   const [sent, setSent] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
 
   const socials = [
     { icon: '📧', label: 'Email', value: 'chandrutech.p@gmail.com', href: 'mailto:chandrutech.p@gmail.com', color: '#00d4ff' },
@@ -16,11 +21,37 @@ export default function ContactSection() {
     { icon: '💬', label: 'WhatsApp', value: '9345469238', href: 'https://wa.me/919345469238', color: '#25d366' },
   ]
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setSent(true)
-    setTimeout(() => setSent(false), 3000)
-    setFormData({ name: '', email: '', message: '' })
+    if (!formData.name || !formData.email || !formData.message) {
+      return
+    }
+
+    setLoading(true)
+    setError(false)
+
+    try {
+      const response = await fetch(`https://formspree.io/f/${FORMSPREE_FORM_ID}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (response.ok) {
+        setSent(true)
+        setFormData({ name: '', email: '', message: '' })
+        setTimeout(() => setSent(false), 5000)
+      } else {
+        setError(true)
+      }
+    } catch (err) {
+      setError(true)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -131,11 +162,13 @@ export default function ContactSection() {
                   }}>{field}</label>
                   {field === 'message' ? (
                     <textarea
+                      name="message"
                       rows={4}
                       value={formData[field]}
                       onChange={e => setFormData({ ...formData, [field]: e.target.value })}
                       onFocus={() => setFocused(field)}
                       onBlur={() => setFocused(null)}
+                      required
                       style={{
                         width: '100%',
                         background: 'rgba(255,255,255,0.03)',
@@ -153,11 +186,13 @@ export default function ContactSection() {
                     />
                   ) : (
                     <input
+                      name={field}
                       type={field === 'email' ? 'email' : 'text'}
                       value={formData[field]}
                       onChange={e => setFormData({ ...formData, [field]: e.target.value })}
                       onFocus={() => setFocused(field)}
                       onBlur={() => setFocused(null)}
+                      required
                       style={{
                         width: '100%',
                         background: 'rgba(255,255,255,0.03)',
@@ -179,11 +214,21 @@ export default function ContactSection() {
               <motion.button
                 type="submit"
                 className="btn-primary"
-                style={{ width: '100%' }}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                disabled={loading}
+                style={{
+                  width: '100%',
+                  opacity: loading ? 0.7 : 1,
+                  cursor: loading ? 'not-allowed' : 'pointer',
+                }}
+                whileHover={loading ? {} : { scale: 1.02 }}
+                whileTap={loading ? {} : { scale: 0.98 }}
               >
-                <span>{sent ? '✅ MESSAGE SENT!' : '🚀 TRANSMIT MESSAGE'}</span>
+                <span>
+                  {loading && '📡 TRANSMITTING MESSAGE...'}
+                  {!loading && sent && '✅ MESSAGE TRANSMITTED!'}
+                  {!loading && error && '❌ ERROR! TRY AGAIN'}
+                  {!loading && !sent && !error && '🚀 TRANSMIT MESSAGE'}
+                </span>
               </motion.button>
             </form>
           </motion.div>
