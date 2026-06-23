@@ -159,7 +159,7 @@ export default function App() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                padding: '0 30px',
+                padding: '0 20px',
                 background: 'rgba(255, 255, 255, 0.95)',
                 borderBottom: '1px solid var(--glass-border)',
                 backdropFilter: 'blur(8px)',
@@ -177,8 +177,13 @@ export default function App() {
                 CHANDRU P
               </div>
 
-              {/* Slide Deck Navigation */}
-              <div style={{ display: 'flex', gap: '4px' }}>
+              {/* Mobile Active Section Title (Visually responsive) */}
+              <div className="mobile-active-badge">
+                {currentSlide ? currentSlide.label : 'WELCOME'}
+              </div>
+
+              {/* Desktop Slide Deck Navigation */}
+              <div className="header-nav-links">
                 <span 
                   onClick={() => {
                     setExploreStarted(false);
@@ -235,7 +240,7 @@ export default function App() {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          padding: exploreStarted ? '100px 20px 40px' : '30px',
+          padding: exploreStarted ? '100px 10px 40px' : '30px 15px',
           position: 'relative'
         }}>
           {/* Ambient gradient slash overlay */}
@@ -251,7 +256,7 @@ export default function App() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.97 }}
                 transition={{ duration: 0.35 }}
-                style={{ width: '100%', maxWidth: '900px', zIndex: 2, padding: '50px' }}
+                style={{ width: '100%', maxWidth: '900px', zIndex: 2 }}
                 className="glass-card"
               >
                 <div className="landing-grid">
@@ -440,7 +445,7 @@ export default function App() {
                 </div>
 
                 {/* Paginated Card Display */}
-                <div className="glass-card" style={{ padding: '40px', position: 'relative' }}>
+                <div className="glass-card" style={{ position: 'relative' }}>
                   
                   <AnimatePresence mode="wait">
                     {currentSlide && (
@@ -452,7 +457,7 @@ export default function App() {
                         transition={{ duration: 0.25 }}
                       >
                         {/* Slide Card Header */}
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', borderBottom: '1px solid var(--glass-border)', paddingBottom: '16px' }}>
+                        <div style={{ marginBottom: '24px', borderBottom: '1px solid var(--glass-border)', paddingBottom: '16px' }} className="card-header-inner">
                           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                             <span style={{ fontSize: '1.6rem' }}>{currentSlide.icon}</span>
                             <div>
@@ -464,7 +469,7 @@ export default function App() {
                               </h3>
                             </div>
                           </div>
-                          <span className="font-mono" style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
+                          <span className="card-period-text">
                             {currentSlide.period}
                           </span>
                         </div>
@@ -484,7 +489,7 @@ export default function App() {
                                 <div className="font-display" style={{ fontSize: '0.9rem', color: 'var(--text-primary)', fontWeight: 750 }}>
                                   {item.institution}
                                 </div>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '5px' }}>
+                                <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '5px', gap: '5px' }}>
                                   <span>{item.degree}</span>
                                   <span style={{ fontWeight: 500 }}>{item.duration}</span>
                                 </div>
@@ -495,7 +500,7 @@ export default function App() {
 
                         {/* Technical Skills Page Content */}
                         {currentSlide.type === 'skills' && (
-                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '15px' }}>
+                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '15px' }}>
                             {currentSlide.details.map(item => (
                               <div key={item.category} style={{ background: 'rgba(0,0,0,0.015)', padding: '15px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.03)' }}>
                                 <span className="font-mono" style={{ fontSize: '0.68rem', color: 'var(--accent-color)', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase' }}>
@@ -511,8 +516,8 @@ export default function App() {
 
                         {/* Projects Page Content */}
                         {currentSlide.type === 'projects' && (
-                          <div style={{ background: 'rgba(0,0,0,0.015)', padding: '20px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.03)' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
+                          <div style={{ background: 'rgba(0,0,0,0.015)', padding: '18px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.03)' }}>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px', gap: '10px' }}>
                               <span className="font-display" style={{ fontSize: '0.95rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                                 Bench Allocation Management System
                               </span>
@@ -520,7 +525,7 @@ export default function App() {
                                 [ REPO ]
                               </a>
                             </div>
-                            <ul style={{ paddingLeft: '20px', margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                            <ul style={{ paddingLeft: '16px', margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
                               {currentSlide.bullets.map((bullet, idx) => (
                                 <li key={idx} style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: '1.6' }}>
                                   {bullet}
@@ -545,7 +550,7 @@ export default function App() {
                               <span className="font-mono" style={{ fontSize: '0.68rem', color: 'var(--text-secondary)', fontWeight: 700, letterSpacing: '1px', display: 'block', marginBottom: '10px' }}>
                                 EXTRA MILESTONES
                               </span>
-                              <ul style={{ paddingLeft: '20px', margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                              <ul style={{ paddingLeft: '16px', margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
                                 {currentSlide.details.bullets.map((b, idx) => (
                                   <li key={idx} style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>
                                     {b}
@@ -558,7 +563,7 @@ export default function App() {
 
                         {/* Ongoing Learning Content */}
                         {currentSlide.type === 'learning' && (
-                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '15px' }}>
+                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '15px' }}>
                             {currentSlide.items.map((item, idx) => (
                               <div key={idx} style={{ background: 'rgba(0,0,0,0.015)', padding: '16px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '12px' }}>
                                 <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--accent-color)' }} />
@@ -600,7 +605,7 @@ export default function App() {
                     }}
                   >
                     <FaChevronLeft size={10} />
-                    <span>PREVIOUS SECTION</span>
+                    <span>PREVIOUS</span>
                   </motion.button>
 
                   {activePageIndex < slides.length ? (
@@ -621,12 +626,12 @@ export default function App() {
                         cursor: 'pointer'
                       }}
                     >
-                      <span>NEXT SECTION</span>
+                      <span>NEXT</span>
                       <FaChevronRight size={10} />
                     </motion.button>
                   ) : (
                     <span style={{ fontSize: '0.82rem', fontFamily: 'var(--font-display)', fontWeight: 700, color: 'var(--text-muted)' }}>
-                      [ END OF JOURNEY ]
+                      [ END ]
                     </span>
                   )}
                 </div>

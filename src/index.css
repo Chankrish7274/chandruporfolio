@@ -163,6 +163,15 @@ body {
   border-radius: 12px;
   box-shadow: 0 10px 35px rgba(0, 0, 0, 0.03);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 40px;
+}
+
+/* Responsive card padding */
+@media (max-width: 600px) {
+  .glass-card {
+    padding: 24px 18px;
+    border-radius: 10px;
+  }
 }
 
 /* Dynamic theme button */
@@ -407,4 +416,56 @@ body {
 .paginated-nav-item:hover, .paginated-nav-item.active {
   color: var(--accent-color);
   background: rgba(0, 0, 0, 0.02);
+}
+
+/* Responsive classes for the main page sliders */
+.header-nav-links {
+  display: flex;
+  gap: 4px;
+}
+
+.mobile-active-badge {
+  display: none;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.78rem;
+  color: var(--accent-color);
+  background: var(--accent-dark);
+  padding: 4px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.card-header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-period-text {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+@media (max-width: 800px) {
+  .header-nav-links {
+    display: none !important;
+  }
+  .mobile-active-badge {
+    display: block !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .card-header-inner {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 8px;
+  }
+  .card-period-text {
+    align-self: flex-start;
+  }
 }
